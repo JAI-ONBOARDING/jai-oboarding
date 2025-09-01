@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste API</title>
+  </head>
+  <body>
+    <h1>Teste da API</h1>
+    <button onclick="testRegister()">Testar Registro</button>
+    <div id="result"></div>
+
+    <script>
+      async function testRegister() {
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "Testando...";
+
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/users/register",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: "teste@teste.com",
+                password: "123456",
+                nome: "Teste",
+              }),
+            }
+          );
+
+          const data = await response.json();
+
+          resultDiv.innerHTML = `
+                    <h3>Status: ${response.status}</h3>
+                    <h3>Status Text: ${response.statusText}</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+        } catch (error) {
+          resultDiv.innerHTML = `<h3>Erro: ${error.message}</h3>`;
+        }
+      }
+    </script>
+  </body>
+</html>
