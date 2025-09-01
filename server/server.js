@@ -9,10 +9,10 @@ const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
-// Configuração CORS para desenvolvimento local - permitir todas as origens
+
 app.use(
   cors({
-    origin: "*", // Permitir todas as origens para desenvolvimento
+    origin: "https://jai-oboarding-kdww.vercel.app", 
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: [
       "Content-Type",
@@ -21,12 +21,10 @@ app.use(
       "ngrok-skip-browser-warning",
     ],
     credentials: true,
-    optionsSuccessStatus: 200, // Para compatibilidade com alguns navegadores
+    optionsSuccessStatus: 200, 
   })
 );
 
-// Resposta automática para requisições OPTIONS (preflight)
-app.options("*", cors());
 
 // Middleware para parsing de JSON e dados de formulário
 app.use(express.json({ limit: "50mb" }));
